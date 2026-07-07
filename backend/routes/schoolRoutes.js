@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { protect } = require("../middleware/authMiddleware");
+const { authorizeRoles } = require("../middleware/roleMiddleware");
 
 const {
   getSchools,
@@ -9,19 +11,14 @@ const {
   deleteSchool,
 } = require("../controllers/schoolController");
 
-// GET all schools
-router.get("/", getSchools);
+router.get("/", protect, getSchools);
 
-// GET school by ID
-router.get("/:id", getSchoolById);
+router.post("/", protect, authorizeRoles("admin"), addSchool);
 
-// POST school
-router.post("/", addSchool);
+router.put("/:id", protect, authorizeRoles("admin"), updateSchool);
 
-// PUT school
-router.put("/:id", updateSchool);
+router.delete("/:id", protect, authorizeRoles("admin"), deleteSchool);
 
-// DELETE school
-router.delete("/:id", deleteSchool);
+
 
 module.exports = router;
