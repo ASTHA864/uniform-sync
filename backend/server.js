@@ -3,6 +3,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const schoolRoutes = require("./routes/schoolRoutes");
 const authRoutes = require("./routes/authRoutes");
+const uniformRoutes = require("./routes/uniformRoutes");
 const app = express();
 
 connectDB();
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use("/api/schools", schoolRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/uniforms", uniformRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
