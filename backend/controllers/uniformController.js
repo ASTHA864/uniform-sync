@@ -76,13 +76,25 @@ const addUniform = async (req, res) => {
 
 const getAllUniforms = async (req, res) => {
   try {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+
+    const total = await Uniform.countDocuments();
+
     const uniforms = await Uniform.find()
-      .populate("school",  "name")
-      .sort({ createdAt: -1 });
+      .populate("school", "name")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
 
     res.status(200).json({
       success: true,
-      count: uniforms.length,
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
       data: uniforms,
     });
   } catch (error) {
