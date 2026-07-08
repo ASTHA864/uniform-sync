@@ -191,10 +191,65 @@ const deleteUniform = async (req, res) => {
   }
 };
 
+
+const searchUniforms = async (req, res) => {
+  try {
+    const { school, className, category, gender, size, status, minStock } =
+      req.query;
+
+    let filter = {};
+
+    if (className) {
+      filter.className = className;
+    }
+
+    if (category) {
+      filter.category = category;
+    }
+
+    if (gender) {
+      filter.gender = gender;
+    }
+
+    if (size) {
+      filter.size = size;
+    }
+
+    if (status) {
+      filter.status = status;
+    }
+
+    if (minStock) {
+      filter.stock = { $gte: Number(minStock) };
+    }
+
+    let uniforms = await Uniform.find(filter)
+      .populate("school", "name")
+      .sort({ createdAt: -1 });
+
+    if (school) {
+      uniforms = uniforms.filter((item) =>
+        item.school.name.toLowerCase().includes(school.toLowerCase()),
+      );
+    }
+
+    res.status(200).json({
+      success: true,
+      count: uniforms.length,
+      data: uniforms,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   addUniform,
   getAllUniforms,
   getUniformById,
   updateUniform,
-  deleteUniform
+  deleteUniform,
+  searchUniforms
 };

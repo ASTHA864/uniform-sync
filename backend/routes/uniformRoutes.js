@@ -6,13 +6,15 @@ const {
   getAllUniforms,
   getUniformById,
   updateUniform,
-  deleteUniform} = require("../controllers/uniformController");
+  deleteUniform,
+  searchUniforms} = require("../controllers/uniformController");
 const { protect } = require("../middleware/authMiddleware");
 const { authorizeRoles } = require("../middleware/roleMiddleware");
 
 // Only Admin can add uniforms
 router.post("/", protect, authorizeRoles("admin"), addUniform);
 router.get("/", protect, getAllUniforms);
+router.get("/search", protect, searchUniforms);
 router.get("/:id", protect, getUniformById);
 router.put("/:id", protect, authorizeRoles("admin"), updateUniform);
 router.delete("/:id", protect, authorizeRoles("admin"), deleteUniform);
