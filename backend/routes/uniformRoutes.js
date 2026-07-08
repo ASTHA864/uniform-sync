@@ -4,7 +4,8 @@ const router = express.Router();
 const {
   addUniform,
   getAllUniforms,
-  getUniformById} = require("../controllers/uniformController");
+  getUniformById,
+  updateUniform} = require("../controllers/uniformController");
 const { protect } = require("../middleware/authMiddleware");
 const { authorizeRoles } = require("../middleware/roleMiddleware");
 
@@ -12,5 +13,6 @@ const { authorizeRoles } = require("../middleware/roleMiddleware");
 router.post("/", protect, authorizeRoles("admin"), addUniform);
 router.get("/", protect, getAllUniforms);
 router.get("/:id", protect, getUniformById);
+router.put("/:id", protect, authorizeRoles("admin"), updateUniform);
 
 module.exports = router;

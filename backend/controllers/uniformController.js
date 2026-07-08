@@ -121,9 +121,55 @@ const getUniformById = async (req, res) => {
 };
 
 
+const updateUniform = async (req, res) => {
+  try {
+    const uniform = await Uniform.findById(req.params.id);
+
+    if (!uniform) {
+      return res.status(404).json({
+        success: false,
+        message: "Uniform not found",
+      });
+    }
+
+    // If school is being updated, verify it exists
+    if (req.body.school) {
+      const schoolExists = await School.findById(req.body.school);
+
+      if (!schoolExists) {
+        return res.status(404).json({
+          success: false,
+          message: "School not found",
+        });
+      }
+    }
+
+    const updatedUniform = await Uniform.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      },
+    ).populate("school", "name");
+
+    res.status(200).json({
+      success: true,
+      message: "Uniform updated successfully",
+      data: updatedUniform,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 
 module.exports = {
   addUniform,
   getAllUniforms,
   getUniformById,
+  updateUniform,
 };
