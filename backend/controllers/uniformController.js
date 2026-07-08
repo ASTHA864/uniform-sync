@@ -166,10 +166,35 @@ const updateUniform = async (req, res) => {
   }
 };
 
+const deleteUniform = async (req, res) => {
+  try {
+    const uniform = await Uniform.findById(req.params.id);
+
+    if (!uniform) {
+      return res.status(404).json({
+        success: false,
+        message: "Uniform not found",
+      });
+    }
+
+    await Uniform.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      message: "Uniform deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 
 module.exports = {
   addUniform,
   getAllUniforms,
   getUniformById,
   updateUniform,
+  deleteUniform
 };

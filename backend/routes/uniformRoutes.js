@@ -5,7 +5,8 @@ const {
   addUniform,
   getAllUniforms,
   getUniformById,
-  updateUniform} = require("../controllers/uniformController");
+  updateUniform,
+  deleteUniform} = require("../controllers/uniformController");
 const { protect } = require("../middleware/authMiddleware");
 const { authorizeRoles } = require("../middleware/roleMiddleware");
 
@@ -14,5 +15,6 @@ router.post("/", protect, authorizeRoles("admin"), addUniform);
 router.get("/", protect, getAllUniforms);
 router.get("/:id", protect, getUniformById);
 router.put("/:id", protect, authorizeRoles("admin"), updateUniform);
+router.delete("/:id", protect, authorizeRoles("admin"), deleteUniform);
 
 module.exports = router;
