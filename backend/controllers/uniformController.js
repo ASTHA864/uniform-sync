@@ -57,9 +57,15 @@ const addUniform = async (req, res) => {
       status,
     });
 
+    // Populate school details before sending response
+    const populatedUniform = await Uniform.findById(uniform._id).populate(
+      "school",
+      "name",
+    );
+
     res.status(201).json({
       message: "Uniform added successfully",
-      uniform,
+      uniform: populatedUniform,
     });
   } catch (error) {
     res.status(500).json({
@@ -68,6 +74,56 @@ const addUniform = async (req, res) => {
   }
 };
 
+const getAllUniforms = async (req, res) => {
+  try {
+    const uniforms = await Uniform.find()
+      .populate("school",  "name")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: uniforms.length,
+      data: uniforms,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+const getUniformById = async (req, res) => {
+  try {
+    const uniform = await Uniform.findById(req.params.id).populate(
+      "school",
+      "name" ,
+    );
+
+    if (!uniform) {
+      return res.status(404).json({
+        success: false,
+        message: "Uniform not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: uniform,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
 module.exports = {
   addUniform,
+  getAllUniforms,
+  getUniformById,
 };
