@@ -86,8 +86,38 @@ const getProfitAnalytics = async (req, res) => {
     });
   }
 };
+
+const getMonthlySalesAnalytics = async (req, res) => {
+  try {
+    const analytics = await Sale.aggregate([
+      {
+        $group: {
+          _id: { month: { $month: "$createdAt" } },
+          totalSales: { $sum: "$totalAmount" },
+          orders: { $sum: 1 },
+        },
+      },
+      {
+        $sort: {
+          "_id.month": 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: analytics,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   getDashboardStats,
   getLowStockUniforms,
   getProfitAnalytics,
+  getMonthlySalesAnalytics,
 };
