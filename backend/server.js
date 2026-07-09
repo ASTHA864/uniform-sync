@@ -5,6 +5,7 @@ const schoolRoutes = require("./routes/schoolRoutes");
 const authRoutes = require("./routes/authRoutes");
 const uniformRoutes = require("./routes/uniformRoutes");
 const saleRoutes = require("./routes/saleRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 
 connectDB();
@@ -18,6 +19,7 @@ app.use("/api/schools", schoolRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/uniforms", uniformRoutes);
 app.use("/api/sales", saleRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
