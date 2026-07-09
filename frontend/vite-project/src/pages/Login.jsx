@@ -14,9 +14,11 @@ function Login() {
         password,
       });
 
-      console.log(response.data);
+      localStorage.setItem("token", response.data.token);
 
-      alert("Login Successful");
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      window.location.href = "/dashboard";
     } catch (error) {
       console.error(error);
 
