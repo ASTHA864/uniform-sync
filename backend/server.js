@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const uniformRoutes = require("./routes/uniformRoutes");
 const saleRoutes = require("./routes/saleRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const cors = require("cors");
 const app = express();
 
 connectDB();
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 
 // middleware used to read json data
+app.use(cors());
 app.use(express.json());
 app.use("/api/schools", schoolRoutes);
 app.use("/api/auth", authRoutes);
