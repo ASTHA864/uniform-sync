@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const schoolRoutes = require("./routes/schoolRoutes");
 const authRoutes = require("./routes/authRoutes");
 const uniformRoutes = require("./routes/uniformRoutes");
+const saleRoutes = require("./routes/saleRoutes");
 const app = express();
 
 connectDB();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/schools", schoolRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/uniforms", uniformRoutes);
+app.use("/api/sales", saleRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
