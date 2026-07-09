@@ -31,6 +31,28 @@ const getDashboardStats = async (req, res) => {
   }
 };
 
+const getLowStockUniforms = async (req, res) => {
+  try {
+    const lowStockUniforms = await Uniform.find({
+      stock: { $lte: 10 },
+    })
+      .populate("school", "name")
+      .sort({ stock: 1 });
+
+    res.status(200).json({
+      success: true,
+      count: lowStockUniforms.length,
+      data: lowStockUniforms,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getDashboardStats,
+  getLowStockUniforms,
 };
