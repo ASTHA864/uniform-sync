@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StatCard from "../components/StatCard";
 import api from "../services/api";
 
 function Dashboard() {
@@ -37,12 +38,15 @@ function Dashboard() {
       <button onClick={handleLogout}>Logout</button>
 
       {stats && (
-        <>
-          <h3>Total Schools: {stats.totalSchools}</h3>
-          <h3>Total Uniforms: {stats.totalUniforms}</h3>
-          <h3>Total Sales: {stats.totalSales}</h3>
-          <h3>Total Revenue: ₹{stats.totalRevenue}</h3>
-        </>
+        <div className="grid grid-cols-2 gap-4 mt-5">
+          <StatCard title="Total Schools" value={stats.totalSchools} />
+
+          <StatCard title="Total Uniforms" value={stats.totalUniforms} />
+
+          <StatCard title="Total Sales" value={stats.totalSales} />
+
+          <StatCard title="Total Revenue" value={`₹${stats.totalRevenue}`} />
+        </div>
       )}
     </div>
   );
