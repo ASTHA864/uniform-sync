@@ -32,23 +32,23 @@ function Sales() {
       <div className="p-5 flex-1">
         <h1>Sales Management</h1>
 
-        <table>
-          <thead>
+        <table className="w-full border shadow bg-white">
+          <thead className="bg-gray-100">
             <tr>
-              <th>Customer</th>
-              <th>Phone</th>
-              <th>Total Amount</th>
-              <th>Payment</th>
+              <th className="border p-3">Customer</th>
+              <th className="border p-3">Phone</th>
+              <th className="border p-3">Total Amount</th>
+              <th className="border p-3">Payment</th>
             </tr>
           </thead>
 
           <tbody>
             {sales.map((sale) => (
               <tr key={sale._id}>
-                <td>{sale.customerName}</td>
-                <td>{sale.customerPhone}</td>
-                <td>₹{sale.totalAmount}</td>
-                <td>{sale.paymentMethod}</td>
+                <td className="border p-3">{sale.customerName}</td>
+                <td className="border p-3">{sale.customerPhone}</td>
+                <td className="border p-3">₹{sale.totalAmount}</td>
+                <td className="border p-3">{sale.paymentMethod}</td>
               </tr>
             ))}
           </tbody>

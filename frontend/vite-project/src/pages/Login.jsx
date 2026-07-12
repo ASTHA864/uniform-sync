@@ -31,6 +31,7 @@ function Login() {
       <form onSubmit={handleLogin} className="border p-6 rounded-lg w-80">
         <h1 className="text-2xl font-bold mb-4 text-center">
           UniformSync Login
+          
         </h1>
 
         <input

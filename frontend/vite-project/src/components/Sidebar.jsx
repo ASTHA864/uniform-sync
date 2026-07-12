@@ -2,14 +2,25 @@ import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="w-60 min-h-screen border-r p-4">
-      <h2 className="text-xl font-bold mb-5">UniformSync</h2>
+    <div className="w-64 min-h-screen bg-gray-900 text-white p-5">
+      <h2 className="text-2xl font-bold mb-8">UniformSync</h2>
 
-      <div className="flex flex-col gap-3">
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/schools">Schools</Link>
-        <Link to="/uniforms">Uniforms</Link>
-        <Link to="/sales">Sales</Link>
+      <div className="flex flex-col gap-4">
+        <Link to="/dashboard" className="hover:bg-gray-700 p-2 rounded">
+          Dashboard
+        </Link>
+
+        <Link to="/schools" className="hover:bg-gray-700 p-2 rounded">
+          Schools
+        </Link>
+
+        <Link to="/uniforms" className="hover:bg-gray-700 p-2 rounded">
+          Uniforms
+        </Link>
+
+        <Link to="/sales" className="hover:bg-gray-700 p-2 rounded">
+          Sales
+        </Link>
       </div>
     </div>
   );

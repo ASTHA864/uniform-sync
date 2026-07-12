@@ -32,27 +32,27 @@ function Uniforms() {
       <div className="p-5 flex-1">
         <h1>Uniform Management</h1>
 
-        <table>
-          <thead>
+        <table className="w-full border shadow bg-white">
+          <thead className="bg-gray-100">
             <tr>
-              <th>School</th>
-              <th>Class</th>
-              <th>Category</th>
-              <th>Size</th>
-              <th>Price</th>
-              <th>Stock</th>
+              <th className="border p-3">School</th>
+              <th className="border p-3">Class</th>
+              <th className="border p-3">Category</th>
+              <th className="border p-3">Size</th>
+              <th className="border p-3">Price</th>
+              <th className="border p-3">Stock</th>
             </tr>
           </thead>
 
           <tbody>
             {uniforms.map((uniform) => (
               <tr key={uniform._id}>
-                <td>{uniform.school?.name}</td>
-                <td>{uniform.className}</td>
-                <td>{uniform.category}</td>
-                <td>{uniform.size}</td>
-                <td>₹{uniform.price}</td>
-                <td>{uniform.stock}</td>
+                <td className="border p-3">{uniform.school?.name}</td>
+                <td className="border p-3">{uniform.className}</td>
+                <td className="border p-3">{uniform.category}</td>
+                <td className="border p-3">{uniform.size}</td>
+                <td className="border p-3">₹{uniform.price}</td>
+                <td className="border p-3">{uniform.stock}</td>
               </tr>
             ))}
           </tbody>

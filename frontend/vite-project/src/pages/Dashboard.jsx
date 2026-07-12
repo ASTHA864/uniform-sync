@@ -36,10 +36,15 @@ function Dashboard() {
     <div className="flex">
       <Sidebar />
 
-      <div className="p-5 flex-1">
-        <h1>UniformSync Dashboard</h1>
+      <div className="p-6 flex-1 bg-gray-100 min-h-screen">
+        <h1 className="text-3xl font-bold mb-5">UniformSync Dashboard</h1>
 
-        <button onClick={handleLogout}>Logout</button>
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 text-white px-4 py-2 rounded mb-5"
+        >
+          Logout
+        </button>
 
         {stats && (
           <div className="grid grid-cols-2 gap-4 mt-5">

@@ -32,21 +32,21 @@ function Schools() {
       <div className="p-5 flex-1">
         <h1>Schools Management</h1>
 
-        <table>
-          <thead>
+        <table className="w-full border shadow bg-white">
+          <thead className="bg-gray-100">
             <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone</th>
+              <th className="border p-3">Name</th>
+              <th className="border p-3">Address</th>
+              <th className="border p-3">Phone</th>
             </tr>
           </thead>
 
           <tbody>
             {schools.map((school) => (
               <tr key={school._id}>
-                <td>{school.name}</td>
-                <td>{school.address}</td>
-                <td>{school.phone}</td>
+                <td className="border p-3">{school.name}</td>
+                <td className="border p-3">{school.address}</td>
+                <td className="border p-3">{school.phone}</td>
               </tr>
             ))}
           </tbody>
